@@ -1,30 +1,36 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div>
+    <h1>Tienda 32 Bits</h1>
+    <h3>Lista de juegos</h3>
+    <table border="1px">
+      <thead>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Stock</th>
+        <th>Precio</th>
+      </thead>
+      <tbody>
+        <tr v-for="(game, i) in games" :key="i" :style="{color: game.color }">
+          <td>{{ game.code }}</td>
+          <td>{{ game.name }}</td>
+          <td>{{ game.stock }}</td>
+          <td>${{parseInt(game.price).toLocaleString()}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+  import { mapState } from 'vuex'
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  export default {
+    name: 'App',
+    computed: {
+      ...mapState(['games']),
+    },
   }
-}
+</script>
+
+<style lang='scss'>
 </style>
